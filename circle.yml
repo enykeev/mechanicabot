@@ -32,4 +32,4 @@ stages:
           ./hyper config tcp://us-west-1.hyper.sh:443
           ./hyper pull quay.io/enykeev/mechanicabot:$CIRCLE_SHA1
           ./hyper rm -f mechanicabot
-          ./hyper run -d -e DISCORD_TOKEN=$DISCORD_TOKEN --name mechanicabot quay.io/enykeev/mechanicabot:$CIRCLE_SHA1
+          ./hyper run -d -e DISCORD_TOKEN=$DISCORD_TOKEN --name mechanicabot --size=s1 quay.io/enykeev/mechanicabot:$CIRCLE_SHA1
