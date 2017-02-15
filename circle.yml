@@ -13,4 +13,8 @@ stages:
       - type: shell
         name: Build image
         command: |
-          docker build -t mechanical .
+          docker build -t quay.io/enykeev/mechanicabot:$CIRCLE_SHA1 .
+      - type: deploy
+        name: Deploy image to repository
+        command: |
+          docker push quay.io/enykeev/mechanicabot:$CIRCLE_SHA1
