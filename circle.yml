@@ -17,4 +17,5 @@ stages:
       - type: deploy
         name: Deploy image to repository
         command: |
+          docker login -u $DOCKER_USER -p $DOCKER_PASS quay.io
           docker push quay.io/enykeev/mechanicabot:$CIRCLE_SHA1
