@@ -27,8 +27,9 @@ stages:
           chmod +x hyper
           ./hyper --version
       - type: deploy
-        name: Deploy new image
+        name: Run container with new image
         command: |
+          ./hyper config tcp://us-west-1.hyper.sh:443
           ./hyper pull quay.io/enykeev/mechanicabot:$CIRCLE_SHA1
           ./hyper rm -f mechanicabot
-          ./hyper run -e DISCORD_TOKEN=$DISCORD_TOKEN --name mechanicabot quay.io/enykeev/mechanicabot:$CIRCLE_SHA1
+          ./hyper run -d -e DISCORD_TOKEN=$DISCORD_TOKEN --name mechanicabot quay.io/enykeev/mechanicabot:$CIRCLE_SHA1
