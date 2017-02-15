@@ -33,3 +33,4 @@ stages:
           ./hyper pull quay.io/enykeev/mechanicabot:$CIRCLE_SHA1
           ./hyper rm -f mechanicabot
           ./hyper run -d -e DISCORD_TOKEN=$DISCORD_TOKEN --name mechanicabot --size=s1 quay.io/enykeev/mechanicabot:$CIRCLE_SHA1
+          ./hyper rmi $(./hyper images -q quay.io/enykeev/mechanicabot)
