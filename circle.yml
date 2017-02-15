@@ -19,3 +19,16 @@ stages:
         command: |
           docker login -u $DOCKER_USER -p $DOCKER_PASS quay.io
           docker push quay.io/enykeev/mechanicabot:$CIRCLE_SHA1
+      - type: deploy
+        name: Install Hyper.sh CLI
+        command: |
+          wget https://hyper-install.s3.amazonaws.com/hyper-linux-x86_64.tar.gz
+          tar xzf hyper-linux-x86_64.tar.gz
+          chmod +x hyper
+          ./hyper --version
+      - type: deploy
+        name: Deploy new image
+        command: |
+          ./hyper pull quay.io/enykeev/mechanicabot:$CIRCLE_SHA1
+          ./hyper rm -f mechanicabot
+          ./hyper run -e DISCORD_TOKEN=$DISCORD_TOKEN --name mechanicabot quay.io/enykeev/mechanicabot:$CIRCLE_SHA1
