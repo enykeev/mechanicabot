@@ -1,0 +1,16 @@
+version: 2
+executorType: machine
+stages:
+  build:
+    workDir: ~/mechanical
+    steps:
+      - type: checkout
+      - type: shell
+        name: Check Docker version
+        command: |
+          docker --version
+          docker-compose --version
+      - type: shell
+        name: Build image
+        command: |
+          docker build -t mechanical .
